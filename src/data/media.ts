@@ -5,6 +5,7 @@
 export const mediaPaths = {
   logo: "/images/Web_Logo.png",
   heroBackground: "/images/hero_image.jpg",
+  heroBackgroundMobile: "/images/hero_mobile_view.jpg",
   heroBackgroundFallback: "/images/media.jpg",
   heroFoodCutout: "/images/media.jpg",
   pizza: "/images/media%20(1).jpg",

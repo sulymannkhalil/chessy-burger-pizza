@@ -65,16 +65,24 @@ export function Hero() {
     <section
       ref={sectionRef}
       id="hero"
-      className="relative flex min-h-[100svh] items-end justify-center overflow-hidden pb-8 pt-24 sm:pb-14 sm:pt-32"
+      className="relative flex min-h-[100svh] justify-center overflow-hidden pb-8 pt-[48svh] sm:items-end sm:pb-14 sm:pt-32"
     >
       <div ref={bgRef} className="absolute inset-0 origin-top sm:scale-105">
+        <Image
+          src={mediaPaths.heroBackgroundMobile}
+          alt={heroContent.backgroundImage.alt ?? "Chessy Pizza and Burger"}
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-[57%_center] sm:hidden"
+        />
         <Image
           src={heroSrc}
           alt={heroContent.backgroundImage.alt ?? "Chessy Pizza and Burger"}
           fill
           priority
           sizes="100vw"
-          className="object-cover object-[center_18%] sm:object-top"
+          className="hidden object-cover object-top sm:block"
           onError={() => {
             if (heroSrc !== mediaPaths.heroBackgroundFallback) {
               setHeroSrc(mediaPaths.heroBackgroundFallback);
@@ -93,26 +101,26 @@ export function Hero() {
         aria-hidden
       />
 
-      <Container className="relative z-10 w-full">
+      <Container className="relative z-10 flex w-full justify-center">
         <div
           ref={contentRef}
-          className="mx-auto flex max-w-3xl flex-col items-center text-center"
+          className="mx-auto flex w-full max-w-3xl flex-col items-center px-1 text-center sm:max-w-5xl sm:px-0"
         >
           <h1
             data-hero-item
-            className="mt-10 whitespace-nowrap font-display text-[clamp(1.35rem,5.2vw,5.5rem)] uppercase leading-[0.92] tracking-tight text-white sm:mt-24"
+            className="mx-auto w-full text-center text-balance font-display text-[clamp(1.65rem,7.4vw,5.5rem)] uppercase leading-[0.95] tracking-tight text-white sm:mt-0 sm:whitespace-nowrap sm:text-[clamp(1.75rem,4.8vw,4.75rem)] sm:leading-[0.92]"
           >
             {heroContent.headline}
           </h1>
           <p
             data-hero-item
-            className="mt-4 max-w-lg font-body text-base leading-relaxed text-white/90 sm:mt-5 sm:text-lg"
+            className="mx-auto mt-4 max-w-lg font-body text-lg leading-relaxed text-white/90 sm:mt-5 sm:text-lg"
           >
             {heroContent.supporting}
           </p>
           <div
             data-hero-item
-            className="mt-6 flex flex-wrap items-center justify-center gap-3 sm:mt-8"
+            className="mt-6 flex w-full flex-wrap items-center justify-center gap-3 sm:mt-8 [&_a]:min-h-12 [&_a]:px-7 [&_a]:text-base sm:[&_a]:min-h-0 sm:[&_a]:px-6 sm:[&_a]:text-lg"
           >
             <Button href="/menu" size="lg">
               {heroContent.exploreCta}
@@ -128,7 +136,7 @@ export function Hero() {
           </div>
           <p
             data-hero-item
-            className="mt-5 font-body text-sm font-semibold uppercase tracking-[0.14em] text-brand-primary sm:mt-6"
+            className="mx-auto mt-5 max-w-md font-body text-base font-semibold uppercase tracking-[0.14em] text-brand-primary sm:mt-6 sm:max-w-none sm:text-sm"
           >
             {heroContent.supportingInfo}
           </p>
