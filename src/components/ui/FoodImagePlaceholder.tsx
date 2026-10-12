@@ -47,9 +47,9 @@ function IconFallback({
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,201,40,0.22),transparent_55%),radial-gradient(circle_at_80%_75%,rgba(216,59,50,0.12),transparent_50%)]"
         aria-hidden
       />
-      <div className="relative flex h-[4.5rem] w-[4.5rem] items-center justify-center rounded-full bg-white/80 ring-1 ring-brand-dark/10 sm:h-20 sm:w-20">
+      <div className="relative flex h-12 w-12 items-center justify-center rounded-full bg-white/80 ring-1 ring-brand-dark/10 sm:h-14 sm:w-14">
         {createElement(getFoodCategoryIcon(categoryId, itemName), {
-          className: "h-9 w-9 text-brand-dark sm:h-10 sm:w-10",
+          className: "h-6 w-6 text-brand-dark sm:h-7 sm:w-7",
           strokeWidth: 1.6,
           "aria-hidden": true,
         })}

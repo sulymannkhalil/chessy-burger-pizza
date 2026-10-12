@@ -13,7 +13,10 @@ export const mediaPaths = {
     "/images/475479585_558408433868680_3247292529209636254_n.jpg",
   cheesyFries:
     "/images/503445787_651540764555446_7037812678483332534_n.jpg",
+  /** Custom hero — must be committed under public/images for Netlify. */
   heroBackground: "/images/heroimage.jpg",
+  /** Tracked fallback if heroimage.jpg is missing from the deploy. */
+  heroBackgroundFallback: "/images/pexels-lucasandrade-11519277.jpg",
   gourmetBurgerBoard: "/images/media%20(2).jpg",
   sharingFeast: "/images/pexels-lucasandrade-11519277.jpg",
   pizzaBurgerNight: "/images/pexels-a-darmel-6643712.jpg",

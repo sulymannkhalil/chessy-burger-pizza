@@ -1,10 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { heroContent } from "@/data/content";
+import { mediaPaths } from "@/data/media";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
@@ -16,6 +17,9 @@ export function Hero() {
   const bgRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const reducedMotion = usePrefersReducedMotion();
+  const [heroSrc, setHeroSrc] = useState(
+    heroContent.backgroundImage.src ?? mediaPaths.heroBackgroundFallback,
+  );
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -65,12 +69,17 @@ export function Hero() {
     >
       <div ref={bgRef} className="absolute inset-0 origin-top sm:scale-105">
         <Image
-          src={heroContent.backgroundImage.src!}
+          src={heroSrc}
           alt={heroContent.backgroundImage.alt ?? "Chessy Pizza and Burger"}
           fill
           priority
           sizes="100vw"
           className="object-cover object-[center_18%] sm:object-top"
+          onError={() => {
+            if (heroSrc !== mediaPaths.heroBackgroundFallback) {
+              setHeroSrc(mediaPaths.heroBackgroundFallback);
+            }
+          }}
         />
       </div>
 

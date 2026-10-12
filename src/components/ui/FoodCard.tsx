@@ -32,10 +32,10 @@ export function FoodCard({
         itemName={item.name}
         src={item.image?.src}
         alt={item.image?.alt ?? item.name}
-        aspectRatio={item.image?.aspectRatio ?? "1/1"}
+        aspectRatio="16/9"
         rounded="none"
         forceIcon
-        className={cn("w-full", compact ? "min-h-[10rem]" : "min-h-[12rem]")}
+        className={cn("w-full", compact ? "min-h-[7rem]" : "min-h-[8rem]")}
       />
       <div className={cn("flex flex-1 flex-col gap-2 p-4", !compact && "sm:p-5")}>
         <div className="flex items-start justify-between gap-3">

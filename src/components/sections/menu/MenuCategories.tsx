@@ -62,16 +62,16 @@ function scrollMenuToTop() {
 
 export function MenuCategories() {
   const [activeId, setActiveId] = useState(firstCategoryId);
-  const navRef = useRef<HTMLElement>(null);
+  const [hidden, setHidden] = useState(false);
   const tabRefs = useRef<Record<string, HTMLButtonElement | null>>({});
   const readyRef = useRef(false);
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
     const hash = window.location.hash.replace(/^#/, "");
     const hasValidHash = Boolean(hash && document.getElementById(hash));
 
     if (!hasValidHash) {
-      // Opening /menu (or Menu nav) must land on Deals, not a stale mid-page highlight.
       scrollMenuToTop();
       if (window.location.hash) {
         window.history.replaceState(null, "", "/menu");
@@ -91,11 +91,25 @@ export function MenuCategories() {
     }, 200);
 
     const update = () => {
+      const y = window.scrollY;
+      const delta = y - lastScrollY.current;
+
+      if (y < 64) {
+        setHidden(false);
+      } else if (delta > 6) {
+        setHidden(true);
+      } else if (delta < -6) {
+        setHidden(false);
+      }
+
+      lastScrollY.current = y;
+
       if (!readyRef.current || isScrollSpyLocked()) return;
       const next = readActiveCategoryId();
       if (next) setActiveId(next);
     };
 
+    lastScrollY.current = window.scrollY;
     const unsubscribe = subscribeToScroll(update);
     window.addEventListener("scroll", update, { passive: true });
     window.addEventListener("resize", update);
@@ -133,57 +147,59 @@ export function MenuCategories() {
 
   useEffect(() => {
     const tab = tabRefs.current[activeId];
-    const nav = navRef.current;
-    if (!tab || !nav) return;
+    if (!tab) return;
 
-    const tabLeft = tab.offsetLeft;
-    const tabWidth = tab.offsetWidth;
-    const navWidth = nav.clientWidth;
-    const targetScroll = tabLeft - (navWidth - tabWidth) / 2;
-
-    nav.scrollTo({
-      left: Math.max(0, targetScroll),
+    tab.scrollIntoView({
       behavior: "smooth",
+      inline: "center",
+      block: "nearest",
     });
   }, [activeId]);
 
   const goToCategory = (categoryId: string) => {
     markScrollSpyLocked();
+    setHidden(false);
     setActiveId(categoryId);
     scrollToSection(categoryId, { offset: MENU_SECTION_OFFSET });
     window.history.pushState(null, "", `#${categoryId}`);
   };
 
   return (
-    <div className="sticky top-[4.75rem] z-40 border-y border-brand-dark/10 bg-white/90 backdrop-blur-xl sm:top-[5.25rem]">
+    <div
+      className={cn(
+        "sticky top-[4.75rem] z-40 border-y border-brand-dark/10 bg-white/90 backdrop-blur-xl transition-transform duration-300 ease-out sm:top-[5.25rem]",
+        hidden && "-translate-y-[calc(100%+5.25rem)] pointer-events-none",
+      )}
+    >
       <Container className="py-3">
         <nav
-          ref={navRef}
           aria-label="Menu categories"
-          className="-mx-1 flex gap-2.5 overflow-x-auto px-1 pb-1 scroll-smooth [scrollbar-width:thin]"
+          className="overflow-x-auto px-1 pb-1 scroll-smooth [scrollbar-width:thin]"
         >
-          {menuCategories.map((category) => {
-            const isActive = activeId === category.id;
-            return (
-              <button
-                key={category.id}
-                type="button"
-                ref={(node) => {
-                  tabRefs.current[category.id] = node;
-                }}
-                onClick={() => goToCategory(category.id)}
-                aria-current={isActive ? "true" : undefined}
-                className={cn(
-                  "shrink-0 rounded-xl px-4 py-2.5 font-body text-sm font-semibold whitespace-nowrap transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary",
-                  isActive
-                    ? "bg-brand-primary text-brand-dark"
-                    : "bg-brand-supporting text-brand-dark/80 hover:bg-brand-primary/50",
-                )}
-              >
-                {category.name}
-              </button>
-            );
-          })}
+          <div className="mx-auto flex w-max min-w-full justify-center gap-2.5">
+            {menuCategories.map((category) => {
+              const isActive = activeId === category.id;
+              return (
+                <button
+                  key={category.id}
+                  type="button"
+                  ref={(node) => {
+                    tabRefs.current[category.id] = node;
+                  }}
+                  onClick={() => goToCategory(category.id)}
+                  aria-current={isActive ? "true" : undefined}
+                  className={cn(
+                    "shrink-0 cursor-pointer rounded-xl px-4 py-2.5 font-body text-sm font-semibold whitespace-nowrap transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary",
+                    isActive
+                      ? "bg-brand-primary text-brand-dark"
+                      : "bg-brand-supporting text-brand-dark/80 hover:bg-brand-primary/50",
+                  )}
+                >
+                  {category.name}
+                </button>
+              );
+            })}
+          </div>
         </nav>
       </Container>
     </div>
