@@ -1,58 +1,189 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { menuCategories } from "@/data/menu";
 import { cn } from "@/lib/cn";
 import { Container } from "@/components/ui/Container";
+import {
+  getLenisInstance,
+  scrollToSection,
+  subscribeToScroll,
+} from "@/lib/smooth-scroll";
+
+/** Navbar + sticky category bar clearance for section jumps / scroll-spy. */
+const MENU_SECTION_OFFSET = -172;
+const SPY_OFFSET_PX = 180;
+const SCROLL_SPY_LOCK_MS = 1400;
+const TOP_SCROLL_THRESHOLD = 48;
+
+let scrollSpyLockUntil = 0;
+
+function markScrollSpyLocked() {
+  scrollSpyLockUntil = performance.now() + SCROLL_SPY_LOCK_MS;
+}
+
+function isScrollSpyLocked() {
+  return performance.now() < scrollSpyLockUntil;
+}
+
+function firstCategoryId() {
+  return menuCategories[0]?.id ?? "";
+}
+
+function readActiveCategoryId(): string {
+  const ids = menuCategories.map((category) => category.id);
+  const fallback = ids[0] ?? "";
+
+  if (window.scrollY <= TOP_SCROLL_THRESHOLD) {
+    return fallback;
+  }
+
+  const probeY = window.scrollY + SPY_OFFSET_PX;
+  let current = fallback;
+
+  for (const id of ids) {
+    const el = document.getElementById(id);
+    if (!el || el.offsetHeight === 0) continue;
+    const top = el.getBoundingClientRect().top + window.scrollY;
+    if (top <= probeY) current = id;
+  }
+
+  return current;
+}
+
+function scrollMenuToTop() {
+  const lenis = getLenisInstance();
+  if (lenis) {
+    lenis.scrollTo(0, { immediate: true });
+    return;
+  }
+  window.scrollTo({ top: 0, behavior: "auto" });
+}
 
 export function MenuCategories() {
-  const [activeId, setActiveId] = useState(menuCategories[0]?.id ?? "");
+  const [activeId, setActiveId] = useState(firstCategoryId);
+  const navRef = useRef<HTMLElement>(null);
+  const tabRefs = useRef<Record<string, HTMLButtonElement | null>>({});
+  const readyRef = useRef(false);
 
   useEffect(() => {
-    const sections = menuCategories
-      .map((category) => document.getElementById(category.id))
-      .filter((el): el is HTMLElement => Boolean(el));
+    const hash = window.location.hash.replace(/^#/, "");
+    const hasValidHash = Boolean(hash && document.getElementById(hash));
 
-    if (!sections.length) return;
+    if (!hasValidHash) {
+      // Opening /menu (or Menu nav) must land on Deals, not a stale mid-page highlight.
+      scrollMenuToTop();
+      if (window.location.hash) {
+        window.history.replaceState(null, "", "/menu");
+      }
+    } else {
+      markScrollSpyLocked();
+      window.requestAnimationFrame(() => {
+        setActiveId(hash);
+      });
+    }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible?.target.id) setActiveId(visible.target.id);
-      },
-      {
-        rootMargin: "-30% 0px -55% 0px",
-        threshold: [0.1, 0.25, 0.5],
-      },
-    );
+    const armSpy = window.setTimeout(() => {
+      readyRef.current = true;
+      if (!isScrollSpyLocked()) {
+        setActiveId(readActiveCategoryId());
+      }
+    }, 200);
 
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
+    const update = () => {
+      if (!readyRef.current || isScrollSpyLocked()) return;
+      const next = readActiveCategoryId();
+      if (next) setActiveId(next);
+    };
+
+    const unsubscribe = subscribeToScroll(update);
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+
+    let hashTimer: number | undefined;
+    if (hasValidHash) {
+      hashTimer = window.setTimeout(() => {
+        scrollToSection(hash, { offset: MENU_SECTION_OFFSET });
+      }, 160);
+    }
+
+    const onPopState = () => {
+      const nextHash = window.location.hash.replace(/^#/, "");
+      if (nextHash && document.getElementById(nextHash)) {
+        markScrollSpyLocked();
+        setActiveId(nextHash);
+        scrollToSection(nextHash, { offset: MENU_SECTION_OFFSET });
+        return;
+      }
+      scrollMenuToTop();
+      setActiveId(firstCategoryId());
+    };
+
+    window.addEventListener("popstate", onPopState);
+
+    return () => {
+      window.clearTimeout(armSpy);
+      if (hashTimer) window.clearTimeout(hashTimer);
+      unsubscribe();
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+      window.removeEventListener("popstate", onPopState);
+    };
   }, []);
 
+  useEffect(() => {
+    const tab = tabRefs.current[activeId];
+    const nav = navRef.current;
+    if (!tab || !nav) return;
+
+    const tabLeft = tab.offsetLeft;
+    const tabWidth = tab.offsetWidth;
+    const navWidth = nav.clientWidth;
+    const targetScroll = tabLeft - (navWidth - tabWidth) / 2;
+
+    nav.scrollTo({
+      left: Math.max(0, targetScroll),
+      behavior: "smooth",
+    });
+  }, [activeId]);
+
+  const goToCategory = (categoryId: string) => {
+    markScrollSpyLocked();
+    setActiveId(categoryId);
+    scrollToSection(categoryId, { offset: MENU_SECTION_OFFSET });
+    window.history.pushState(null, "", `#${categoryId}`);
+  };
+
   return (
-    <div className="sticky top-[4.75rem] z-40 border-y border-brand-dark/10 bg-white/90 backdrop-blur-xl">
+    <div className="sticky top-[4.75rem] z-40 border-y border-brand-dark/10 bg-white/90 backdrop-blur-xl sm:top-[5.25rem]">
       <Container className="py-3">
         <nav
+          ref={navRef}
           aria-label="Menu categories"
-          className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-1 [scrollbar-width:thin]"
+          className="-mx-1 flex gap-2.5 overflow-x-auto px-1 pb-1 scroll-smooth [scrollbar-width:thin]"
         >
-          {menuCategories.map((category) => (
-            <a
-              key={category.id}
-              href={`#${category.id}`}
-              className={cn(
-                "shrink-0 rounded-xl px-4 py-2 font-body text-sm font-semibold whitespace-nowrap transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary",
-                activeId === category.id
-                  ? "bg-brand-primary text-brand-dark"
-                  : "bg-brand-supporting text-brand-dark/80 hover:bg-brand-primary/50",
-              )}
-            >
-              {category.name}
-            </a>
-          ))}
+          {menuCategories.map((category) => {
+            const isActive = activeId === category.id;
+            return (
+              <button
+                key={category.id}
+                type="button"
+                ref={(node) => {
+                  tabRefs.current[category.id] = node;
+                }}
+                onClick={() => goToCategory(category.id)}
+                aria-current={isActive ? "true" : undefined}
+                className={cn(
+                  "shrink-0 rounded-xl px-4 py-2.5 font-body text-sm font-semibold whitespace-nowrap transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary",
+                  isActive
+                    ? "bg-brand-primary text-brand-dark"
+                    : "bg-brand-supporting text-brand-dark/80 hover:bg-brand-primary/50",
+                )}
+              >
+                {category.name}
+              </button>
+            );
+          })}
         </nav>
       </Container>
     </div>

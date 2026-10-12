@@ -12,7 +12,10 @@ function StarRow({ rating }: { rating: string }) {
   const filled = Number.isFinite(numeric) ? Math.round(numeric) : 5;
 
   return (
-    <div className="mb-3 flex items-center gap-1 text-brand-primary">
+    <div
+      className="mb-3 flex items-center gap-1 text-brand-primary"
+      aria-label={`${filled} out of 5 stars`}
+    >
       {Array.from({ length: 5 }).map((_, starIndex) => (
         <Star
           key={starIndex}
@@ -24,9 +27,6 @@ function StarRow({ rating }: { rating: string }) {
           aria-hidden
         />
       ))}
-      <span className="ml-2 font-body text-xs font-semibold text-brand-dark/60">
-        {rating}
-      </span>
     </div>
   );
 }
@@ -60,28 +60,11 @@ export async function GoogleReviews() {
                 {googleReviews.overallRating}
               </p>
               <p className="mt-1 font-body text-sm text-brand-dark/70">
-                {googleReviews.isLive
-                  ? `${googleReviews.reviewCount} Google reviews`
-                  : `${googleReviews.reviewCount} guest reviews`}
+                {googleReviews.reviewCount} Google reviews
               </p>
-              {googleReviews.isLive ? (
-                <p className="mt-2 font-body text-xs font-semibold uppercase tracking-wide text-brand-secondary">
-                  Live from Google
-                </p>
-              ) : null}
             </div>
           </Reveal>
         </div>
-
-        {googleReviews.emptyStateMessage ? (
-          <Reveal>
-            <div className="mb-8 rounded-2xl border border-dashed border-brand-secondary/40 bg-brand-supporting/70 px-5 py-4">
-              <p className="font-body text-sm leading-relaxed text-brand-dark/80">
-                {googleReviews.emptyStateMessage}
-              </p>
-            </div>
-          </Reveal>
-        ) : null}
 
         {googleReviews.reviews.length > 0 ? (
           <div className="grid gap-4 md:grid-cols-3">
@@ -95,9 +78,6 @@ export async function GoogleReviews() {
                   <div className="mt-4 border-t border-brand-dark/10 pt-3">
                     <p className="font-body text-sm font-semibold text-brand-dark">
                       {review.reviewerName}
-                    </p>
-                    <p className="font-body text-xs text-brand-dark/55">
-                      {review.reviewDate}
                     </p>
                   </div>
                 </article>

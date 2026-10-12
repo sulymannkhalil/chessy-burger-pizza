@@ -57,7 +57,7 @@ export function About() {
             </div>
           </div>
 
-          <div className="space-y-16 lg:space-y-28 lg:py-8">
+          <div className="space-y-8 lg:space-y-10 lg:py-8">
             <Reveal>
               <SectionHeading heading={aboutContent.heading} />
             </Reveal>

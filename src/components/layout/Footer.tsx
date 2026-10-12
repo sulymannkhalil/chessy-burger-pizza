@@ -15,11 +15,11 @@ export function Footer() {
         className="pointer-events-none absolute -right-16 bottom-0 h-64 w-64 rounded-full bg-brand-secondary/25 blur-3xl"
         aria-hidden
       />
-      <Container className="relative grid gap-6 py-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6 lg:py-10">
+      <Container className="relative grid gap-10 py-14 sm:grid-cols-2 sm:py-16 lg:grid-cols-4 lg:gap-12 lg:py-20">
         <Reveal>
-          <div className="space-y-2">
+          <div className="space-y-4">
             <Logo inverted className="[&_img]:h-12 [&_img]:sm:h-14 [&_img]:lg:h-14" />
-            <p className="max-w-xs font-body text-sm leading-snug text-white/75">
+            <p className="max-w-xs font-body text-sm leading-relaxed text-white/75">
               {restaurant.description}
             </p>
           </div>
@@ -27,10 +27,10 @@ export function Footer() {
 
         <Reveal delay={0.08}>
           <div>
-            <h3 className="mb-2 font-display text-base uppercase tracking-wide text-brand-primary">
+            <h3 className="mb-4 font-display text-base uppercase tracking-wide text-brand-primary">
               Navigate
             </h3>
-            <ul className="space-y-1">
+            <ul className="space-y-2.5">
               {footerNav.map((item) => (
                 <li key={item.href}>
                   <a
@@ -47,10 +47,10 @@ export function Footer() {
 
         <Reveal delay={0.14}>
           <div>
-            <h3 className="mb-2 font-display text-base uppercase tracking-wide text-brand-primary">
+            <h3 className="mb-4 font-display text-base uppercase tracking-wide text-brand-primary">
               Contact
             </h3>
-            <ul className="space-y-1 font-body text-sm text-white/80">
+            <ul className="space-y-2.5 font-body text-sm text-white/80">
               {contact.addressLines.map((line) => (
                 <li key={line}>{line}</li>
               ))}
@@ -58,7 +58,7 @@ export function Footer() {
               {contact.email ? <li>{contact.email}</li> : null}
             </ul>
             {socialLinks.some((link) => link.available && link.href) ? (
-              <ul className="mt-2 flex flex-wrap gap-3">
+              <ul className="mt-5 flex flex-wrap gap-4">
                 {socialLinks
                   .filter((link) => link.available && link.href)
                   .map((link) => (
@@ -80,10 +80,10 @@ export function Footer() {
 
         <Reveal delay={0.2}>
           <div>
-            <h3 className="mb-2 font-display text-base uppercase tracking-wide text-brand-primary">
+            <h3 className="mb-4 font-display text-base uppercase tracking-wide text-brand-primary">
               Hours
             </h3>
-            <ul className="space-y-1.5 font-body text-sm text-white/80">
+            <ul className="space-y-3 font-body text-sm text-white/80">
               {openingHours.map((entry) => (
                 <li key={entry.days}>
                   <p className="font-semibold text-white">{entry.days}</p>
@@ -95,7 +95,7 @@ export function Footer() {
         </Reveal>
       </Container>
       <div className="border-t border-white/10">
-        <Container className="flex flex-col gap-1 py-3 font-body text-xs text-white/55 sm:flex-row sm:items-center sm:justify-between">
+        <Container className="flex flex-col gap-1 py-5 font-body text-xs text-white/55 sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {restaurant.name}. All rights reserved.
           </p>

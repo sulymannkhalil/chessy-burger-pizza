@@ -17,17 +17,19 @@ export function MenuHero() {
         className="pointer-events-none absolute -left-8 bottom-0 h-48 w-48 rounded-full bg-brand-secondary/25 blur-3xl"
         aria-hidden
       />
-      <Container className="relative max-w-3xl">
+      <Container className="relative">
         <Reveal>
-          <p className="mb-3 font-accent text-xl text-brand-secondary">
-            Chessy Pizza and Burger
-          </p>
-          <h1 className="font-display text-5xl uppercase leading-[0.92] tracking-tight text-brand-dark sm:text-6xl lg:text-7xl">
-            {sectionCopy.menuHero.heading}
-          </h1>
-          <p className="mt-5 max-w-2xl font-body text-base leading-relaxed text-brand-dark/75 sm:text-lg">
-            {sectionCopy.menuHero.body}
-          </p>
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="mb-3 font-accent text-xl text-brand-secondary">
+              Chessy Pizza and Burger
+            </p>
+            <h1 className="font-display text-5xl uppercase leading-[0.92] tracking-tight text-brand-dark sm:text-6xl lg:text-7xl">
+              {sectionCopy.menuHero.heading}
+            </h1>
+            <p className="mx-auto mt-5 max-w-2xl font-body text-base leading-relaxed text-brand-dark/75 sm:text-lg">
+              {sectionCopy.menuHero.body}
+            </p>
+          </div>
         </Reveal>
       </Container>
     </SectionWrapper>

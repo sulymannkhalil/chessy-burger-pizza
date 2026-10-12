@@ -1,14 +1,25 @@
+"use client";
+
 import type { MenuItem } from "@/types";
+import { getMenuItemCategoryId } from "@/data/menu";
 import { cn } from "@/lib/cn";
-import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
+import { FoodImagePlaceholder } from "@/components/ui/FoodImagePlaceholder";
 
 type FoodCardProps = {
   item: MenuItem;
+  categoryId?: string;
   className?: string;
   compact?: boolean;
 };
 
-export function FoodCard({ item, className, compact = false }: FoodCardProps) {
+export function FoodCard({
+  item,
+  categoryId,
+  className,
+  compact = false,
+}: FoodCardProps) {
+  const resolvedCategoryId = categoryId ?? getMenuItemCategoryId(item.id);
+
   return (
     <article
       className={cn(
@@ -16,12 +27,14 @@ export function FoodCard({ item, className, compact = false }: FoodCardProps) {
         className,
       )}
     >
-      <MediaPlaceholder
-        label={item.image?.label ?? "ATTACH THE IMAGE"}
+      <FoodImagePlaceholder
+        categoryId={resolvedCategoryId}
+        itemName={item.name}
         src={item.image?.src}
         alt={item.image?.alt ?? item.name}
         aspectRatio={item.image?.aspectRatio ?? "1/1"}
         rounded="none"
+        forceIcon
         className={cn("w-full", compact ? "min-h-[10rem]" : "min-h-[12rem]")}
       />
       <div className={cn("flex flex-1 flex-col gap-2 p-4", !compact && "sm:p-5")}>

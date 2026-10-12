@@ -1,9 +1,13 @@
 import Link from "next/link";
 import { sectionCopy } from "@/data/content";
-import { featuredDish, menuCategories } from "@/data/menu";
+import {
+  featuredDish,
+  getMenuItemCategoryId,
+  menuCategories,
+} from "@/data/menu";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
+import { FoodImagePlaceholder } from "@/components/ui/FoodImagePlaceholder";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { ImageRevealCurtain } from "@/components/motion/ImageRevealCurtain";
@@ -54,12 +58,15 @@ export function MenuPreview() {
                 <p className="mb-4 font-accent text-lg text-brand-primary">
                   Featured dish
                 </p>
-                <MediaPlaceholder
+                <FoodImagePlaceholder
+                  categoryId={getMenuItemCategoryId(featuredDish.id)}
+                  itemName={featuredDish.name}
                   src={featuredDish.image?.src}
                   alt={featuredDish.image?.alt ?? featuredDish.name}
-                  label={featuredDish.image?.label ?? "ATTACH THE IMAGE"}
                   aspectRatio="4/3"
-                  className="rounded-2xl"
+                  rounded="2xl"
+                  forceIcon={false}
+                  priority
                 />
                 <div className="mt-4 text-white">
                   <h3 className="font-display text-2xl uppercase">

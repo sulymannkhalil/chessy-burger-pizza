@@ -11,7 +11,7 @@ function ReviewsFallback() {
   return (
     <section
       id="reviews"
-      className="relative scroll-mt-24 bg-white py-[clamp(4rem,8vw,7.5rem)]"
+      className="relative scroll-mt-28 bg-white py-[clamp(4rem,8vw,7.5rem)] sm:scroll-mt-32"
     >
       <div className="mx-auto max-w-[1200px] px-5 sm:px-6 lg:px-8">
         <div className="h-40 animate-pulse rounded-2xl bg-brand-supporting/80" />

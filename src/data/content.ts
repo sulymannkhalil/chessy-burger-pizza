@@ -2,16 +2,16 @@ import type { MediaAsset } from "@/types";
 import { mediaPaths } from "@/data/media";
 
 export const heroContent = {
-  backgroundWord: "CHESSY",
   headline: "Pizza. Burgers. Bold bites.",
+
   supporting:
     "A fast-food destination with confident flavor, generous plates, and a modern neighborhood energy.",
   exploreCta: "Explore Menu",
   visitCta: "Visit Us",
-  supportingInfo: "Open weekdays · 12 PM – 2 AM · Lahore",
+  supportingInfo: "Open Everyday · 11:00 AM – 11:30 PM · Sheikhupura, Pakistan",
   backgroundImage: {
-    src: mediaPaths.gourmetBurgerBoard,
-    alt: "Cheezy Smash King burger with fries and drink",
+    src: mediaPaths.heroBackground,
+    alt: "Chessy Pizza and Burger hero",
     label: "ATTACH THE IMAGE – HERO BACKGROUND",
     aspectRatio: "16/9",
   } satisfies MediaAsset,
@@ -22,15 +22,15 @@ export const aboutContent = {
   blocks: [
     {
       title: "Our kitchen",
-      body: "Chessy is built for late-night hunger and weekend energy — bold pizza, stacked burgers, and sides that never play small.",
+      body: "Chessy is built for late-night hunger and weekend energy — bold pizza, stacked burgers, and sides that never play small. From weekday cravings to hangouts with friends, our kitchen keeps the heat on and the portions honest. Every plate is made to feel generous, craveable, and ready when you are.",
     },
     {
       title: "How we cook",
-      body: "We keep things hot and simple: fresh prep, generous toppings, and plates that look as good as they taste.",
+      body: "We keep things hot and simple: fresh prep, generous toppings, and plates that look as good as they taste. Dough, patties, sauces, and sides are handled with care so the flavor stays bold from first bite to last. No fuss, no shortcuts — just food that lands fast and hits hard.",
     },
     {
       title: "What we value",
-      body: "Big flavor, friendly service, and a spot where friends can drop in, dig in, and come back for more.",
+      body: "Big flavor, friendly service, and a spot where friends can drop in, dig in, and come back for more. We want every visit to feel easy and welcoming, whether you’re grabbing a quick bite or settling in for a full table of favorites. Good food, good vibes, and guests who leave full and happy — that’s Chessy.",
     },
   ],
   media: {
@@ -73,6 +73,6 @@ export const sectionCopy = {
   },
   menuCta: {
     heading: "Ready to visit?",
-    body: "We’re open weekdays from 12 PM to 2 AM. Find us on the map or ping WhatsApp before you roll through.",
+    body: "We’re open Everyday from 11:00 AM to 11:30 PM. Find us on the map or ping WhatsApp before you roll through.",
   },
 } as const;

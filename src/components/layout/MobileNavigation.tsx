@@ -82,14 +82,14 @@ export function MobileNavigation({ open, onClose }: MobileNavigationProps) {
           </button>
         </div>
 
-        <nav className="flex flex-1 flex-col gap-6">
+        <nav className="flex flex-1 flex-col items-center justify-center gap-3 text-center">
           {mainNav.map((item) => (
             <NavigationLink
               key={item.href}
               href={item.href}
               label={item.label}
               tone="onLight"
-              className="text-2xl"
+              className="min-h-11 w-full max-w-xs px-4 py-2 text-2xl no-underline"
               onNavigate={onClose}
             />
           ))}

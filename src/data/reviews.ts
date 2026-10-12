@@ -1,53 +1,55 @@
 import type { ReviewPlaceholder } from "@/types";
 
-/** Showcase reviews shown when live Google Places data is unavailable. */
+/**
+ * Curated customer reviews for the homepage.
+ * Kept as static content — not overwritten by live Places API responses.
+ */
 export const sampleReviews: ReviewPlaceholder[] = [
   {
     id: "sample-1",
-    reviewerName: "Ayesha Khan",
+    reviewerName: "Malik Hamza",
     reviewText:
-      "The smash burgers are ridiculous — crispy edges, melty cheese, and a soft bun. Came with friends and we finished everything. Definitely coming back for the pizza next time.",
-    reviewDate: "2 weeks ago",
+      "Good experience about food Nd setting family haal is good for family settings food is also very tasty crust kabab pizza is so deliouse sandwich Nd mng others fast food atums are good 👍",
+    reviewDate: "",
     rating: "5.0",
   },
   {
     id: "sample-2",
-    reviewerName: "Hassan Raza",
-    reviewText:
-      "Late-night craving sorted. Ordered the Cheezy Smash King and a large pizza — both hit hard. Portions are generous and the staff was quick even when it was busy.",
-    reviewDate: "3 weeks ago",
+    reviewerName: "M Umais",
+    reviewText: "Good Taste and Rates Are Affordable Nice Taste",
+    reviewDate: "",
     rating: "5.0",
   },
   {
     id: "sample-3",
-    reviewerName: "Sana Malik",
+    reviewerName: "Ali Hamza",
     reviewText:
-      "Tried the BBQ pizza and garlic fries. Flavors are bold without being greasy. Great spot if you want something filling that still tastes fresh.",
-    reviewDate: "1 month ago",
+      "Masha Allah food bhthreen thaa crust kabab pizza so delicious pasta b achaa thaa",
+    reviewDate: "",
     rating: "4.0",
   },
   {
     id: "sample-4",
-    reviewerName: "Bilal Ahmed",
+    reviewerName: "Farhan Bhatti Fanii",
     reviewText:
-      "Consistent quality every visit. Burgers are cooked right, cheese pulls are real, and the vibe is casual and welcoming. Highly recommend for groups.",
-    reviewDate: "1 month ago",
+      "Best taste in the jaranwala road plz tray the first scnd time you are other person going to cheezy pizza yahoo",
+    reviewDate: "",
     rating: "5.0",
   },
   {
     id: "sample-5",
-    reviewerName: "Fatima Noor",
+    reviewerName: "Umar Daraz",
     reviewText:
-      "Wrapped up a wrap combo and a side — simple, tasty, and affordable. WhatsApp ordering was easy and pickup was ready on time.",
-    reviewDate: "2 months ago",
+      "Food was awesome crown crust pizza so delicious. Family setting is comfortable",
+    reviewDate: "",
     rating: "5.0",
   },
   {
     id: "sample-6",
-    reviewerName: "Omar Siddiqui",
+    reviewerName: "Ali Hassan",
     reviewText:
-      "Best local pizza and burger combo we've found. Crust has a nice bite and the toppings are loaded. Perfect weekday dinner stop.",
-    reviewDate: "2 months ago",
+      "GCrown kurst. Kabab crust pizza 🍕 and chessy sandwich 🥪 these things so tasty and yummy …",
+    reviewDate: "",
     rating: "4.0",
   },
 ];

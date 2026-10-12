@@ -20,7 +20,7 @@ export function SectionWrapper({
     <Tag
       id={id}
       className={cn(
-        "relative scroll-mt-24",
+        "relative scroll-mt-28 sm:scroll-mt-32",
         tight
           ? "py-[clamp(3rem,6vw,5rem)]"
           : "py-[clamp(4rem,8vw,7.5rem)]",

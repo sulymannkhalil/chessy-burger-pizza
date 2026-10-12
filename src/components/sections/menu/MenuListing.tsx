@@ -12,7 +12,7 @@ export function MenuListing() {
           <section
             key={category.id}
             id={category.id}
-            className="scroll-mt-40"
+            className="scroll-mt-44 sm:scroll-mt-48"
             aria-labelledby={`${category.id}-heading`}
           >
             <Reveal>
@@ -31,7 +31,7 @@ export function MenuListing() {
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {category.items.map((item, index) => (
                 <Reveal key={item.id} delay={index * 0.04}>
-                  <FoodCard item={item} />
+                  <FoodCard item={item} categoryId={category.id} />
                 </Reveal>
               ))}
             </div>

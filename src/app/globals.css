@@ -60,6 +60,25 @@
     outline: 2px solid var(--brand-primary);
     outline-offset: 2px;
   }
+
+  a,
+  button,
+  summary,
+  label[for],
+  [role="button"],
+  input[type="button"],
+  input[type="submit"],
+  input[type="reset"],
+  select {
+    cursor: pointer;
+  }
+
+  button:disabled,
+  [aria-disabled="true"],
+  input:disabled,
+  select:disabled {
+    cursor: not-allowed;
+  }
 }
 
 @utility font-display {
