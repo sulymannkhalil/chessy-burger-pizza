@@ -17,7 +17,7 @@ export function Hero() {
   const bgRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const reducedMotion = usePrefersReducedMotion();
-  const [heroSrc, setHeroSrc] = useState(
+  const [heroSrc, setHeroSrc] = useState<string>(
     heroContent.backgroundImage.src ?? mediaPaths.heroBackgroundFallback,
   );
 

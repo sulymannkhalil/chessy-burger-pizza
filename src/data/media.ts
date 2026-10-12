@@ -1,26 +1,22 @@
 /**
  * Central media paths for assets under /public/images.
- * Update paths here when replacing photography.
+ * Filenames must match files in public/images exactly (including spaces).
  */
 export const mediaPaths = {
   logo: "/images/Web_Logo.png",
-  heroFoodCutout:
-    "/images/pexels-lucasandrade-10679778-removebg-preview.png",
+  heroBackground: "/images/hero_image.jpg",
+  heroBackgroundFallback: "/images/media.jpg",
+  heroFoodCutout: "/images/media.jpg",
   pizza: "/images/media%20(1).jpg",
-  friedChicken: "/images/pexels-fox-58267-27831789.jpg",
-  wrap: "/images/pexels-iamabdullahsheik-9624298.jpg",
-  crownPizza:
-    "/images/475479585_558408433868680_3247292529209636254_n.jpg",
-  cheesyFries:
-    "/images/503445787_651540764555446_7037812678483332534_n.jpg",
-  /** Custom hero — must be committed under public/images for Netlify. */
-  heroBackground: "/images/heroimage.jpg",
-  /** Tracked fallback if heroimage.jpg is missing from the deploy. */
-  heroBackgroundFallback: "/images/pexels-lucasandrade-11519277.jpg",
-  gourmetBurgerBoard: "/images/media%20(2).jpg",
-  sharingFeast: "/images/pexels-lucasandrade-11519277.jpg",
-  pizzaBurgerNight: "/images/pexels-a-darmel-6643712.jpg",
+  friedChicken: "/images/media%20(2).jpg",
+  wrap: "/images/media%20(3).jpg",
+  crownPizza: "/images/media%20(4).jpg",
+  cheesyFries: "/images/media%20(5).jpg",
+  gourmetBurgerBoard: "/images/media%20(6).jpg",
+  sharingFeast: "/images/media%20(7).jpg",
+  pizzaBurgerNight: "/images/media%20(8).jpg",
   gallery: [
+    "/images/media.jpg",
     "/images/media%20(1).jpg",
     "/images/media%20(2).jpg",
     "/images/media%20(3).jpg",
@@ -30,5 +26,11 @@ export const mediaPaths = {
     "/images/media%20(7).jpg",
     "/images/media%20(8).jpg",
     "/images/media%20(9).jpg",
+    "/images/media%20(10).jpg",
+    "/images/media%20(11).jpg",
+    "/images/media%20(12).jpg",
+    "/images/media%20(13).jpg",
+    "/images/media%20(14).jpg",
+    "/images/media%20(15).jpg",
   ],
 } as const;
