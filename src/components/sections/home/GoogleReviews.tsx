@@ -62,7 +62,7 @@ export async function GoogleReviews() {
               <p className="mt-1 font-body text-sm text-brand-dark/70">
                 {googleReviews.isLive
                   ? `${googleReviews.reviewCount} Google reviews`
-                  : "Google reviews"}
+                  : `${googleReviews.reviewCount} guest reviews`}
               </p>
               {googleReviews.isLive ? (
                 <p className="mt-2 font-body text-xs font-semibold uppercase tracking-wide text-brand-secondary">

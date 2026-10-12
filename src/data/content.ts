@@ -59,8 +59,8 @@ export const sectionCopy = {
   },
   reviews: {
     eyebrow: "Guest trust",
-    heading: "Google Reviews",
-    body: "Authentic feedback from our Google Business listing — updated from Google Maps.",
+    heading: "What guests say",
+    body: "Bold flavors, generous portions, and late-night cravings — here’s what people love about Chessy.",
   },
   contact: {
     eyebrow: "Find us",

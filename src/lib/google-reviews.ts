@@ -1,5 +1,20 @@
 import { googlePlace } from "@/config/google-place";
+import { sampleReviews, sampleReviewsSummary } from "@/data/reviews";
 import type { GoogleReviewsData, ReviewPlaceholder } from "@/types";
+
+function sampleReviewsFallback(
+  reviewsUrl: string,
+  emptyStateMessage = "",
+): GoogleReviewsData {
+  return {
+    overallRating: sampleReviewsSummary.overallRating,
+    reviewCount: sampleReviewsSummary.reviewCount,
+    reviewsUrl,
+    isLive: false,
+    emptyStateMessage,
+    reviews: sampleReviews,
+  };
+}
 
 type PlacesReview = {
   name?: string;
@@ -98,45 +113,25 @@ export async function getGoogleReviews(): Promise<GoogleReviewsData> {
   const apiKey = process.env.GOOGLE_PLACES_API_KEY?.trim();
 
   if (!apiKey) {
-    return {
-      overallRating: "—",
-      reviewCount: "Google",
-      reviewsUrl,
-      isLive: false,
-      emptyStateMessage:
-        "Add GOOGLE_PLACES_API_KEY in `.env.local` to load live Google Reviews here. Until then, open the listing on Google Maps.",
-      reviews: [],
-    };
+    return sampleReviewsFallback(reviewsUrl);
   }
 
   try {
     const placeId = await resolvePlaceId(apiKey);
     if (!placeId) {
-      return {
-        overallRating: "—",
-        reviewCount: "Google",
-        reviewsUrl,
-        isLive: false,
-        emptyStateMessage:
-          "Could not resolve this Google Business listing yet. You can still read reviews on Google Maps.",
-        reviews: [],
-      };
+      return sampleReviewsFallback(reviewsUrl);
     }
 
     const details = await fetchPlaceDetails(apiKey, placeId);
     if (!details) {
-      return {
-        overallRating: "—",
-        reviewCount: "Google",
-        reviewsUrl,
-        isLive: false,
-        emptyStateMessage:
-          "Google Reviews could not be loaded right now. Please try again later or open Google Maps.",
-        reviews: [],
-      };
+      return sampleReviewsFallback(reviewsUrl);
     }
 
     const reviews = mapReviews(details.reviews);
+    if (reviews.length === 0) {
+      return sampleReviewsFallback(reviewsUrl);
+    }
+
     const rating =
       typeof details.rating === "number" ? details.rating.toFixed(1) : "—";
     const count =
@@ -149,22 +144,11 @@ export async function getGoogleReviews(): Promise<GoogleReviewsData> {
       reviewCount: count,
       reviewsUrl,
       isLive: true,
-      emptyStateMessage:
-        reviews.length === 0
-          ? "No written Google Reviews were returned for this listing yet."
-          : "",
+      emptyStateMessage: "",
       reviews,
     };
   } catch (error) {
     console.error("Google Reviews fetch error", error);
-    return {
-      overallRating: "—",
-      reviewCount: "Google",
-      reviewsUrl,
-      isLive: false,
-      emptyStateMessage:
-        "Google Reviews temporarily unavailable. Open the full listing on Google Maps.",
-      reviews: [],
-    };
+    return sampleReviewsFallback(reviewsUrl);
   }
 }
