@@ -123,15 +123,6 @@ export const menuCategories: MenuCategory[] = [
         "Food Blast 1",
         "3 Small Pizza, 1 Litre Cold Drink.",
         "Rs. 1,750",
-        {
-          popular: true,
-          image: {
-            src: mediaPaths.gallery[0],
-            alt: "Food Blast 1 pizza deal",
-            label: "ATTACH THE IMAGE",
-            aspectRatio: "1/1",
-          },
-        },
       ),
       item(
         "deal-food-blast-2",
@@ -295,7 +286,21 @@ export const menuCategories: MenuCategory[] = [
     description: "Creamy and bold pasta — Small / Large.",
     items: [
       item("pasta-macroni", "Macroni Pasta", "Small / Large.", "Rs. 500 / 700"),
-      item("pasta-alfredo", "Alfredo Pasta", "Small / Large.", "Rs. 500 / 750"),
+      item(
+        "pasta-alfredo",
+        "Alfredo Pasta",
+        "Pasta in rich, creamy Alfredo sauce.",
+        "Rs. 500 / 750",
+        {
+          popular: true,
+          image: {
+            src: mediaPaths.pasta,
+            alt: "Alfredo Pasta",
+            label: "ATTACH THE IMAGE",
+            aspectRatio: "1/1",
+          },
+        },
+      ),
       item("pasta-lazzania", "Lazzania Pasta", "Small / Large.", "Rs. 500 / 750"),
       item("pasta-crunchy", "Crunchy Pasta", "Large.", "Rs. 800"),
       item("pasta-bbq", "B.B.Q Pasta", "Small / Large.", "Rs. 500 / 700"),
@@ -342,7 +347,7 @@ export const menuCategories: MenuCategory[] = [
 
 const POPULAR_ITEM_ORDER = [
   "burger-cheesy-special",
-  "deal-food-blast-1",
+  "pasta-alfredo",
   "fries-large",
 ] as const;
 

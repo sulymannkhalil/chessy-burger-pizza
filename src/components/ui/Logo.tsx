@@ -1,8 +1,12 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { restaurant } from "@/config/restaurant";
 import { mediaPaths } from "@/data/media";
 import { cn } from "@/lib/cn";
+import { getLenisInstance } from "@/lib/smooth-scroll";
 
 type LogoProps = {
   className?: string;
@@ -10,6 +14,8 @@ type LogoProps = {
 };
 
 export function Logo({ className, inverted = false }: LogoProps) {
+  const pathname = usePathname();
+
   return (
     <Link
       href="/"
@@ -18,6 +24,18 @@ export function Logo({ className, inverted = false }: LogoProps) {
         className,
       )}
       aria-label={`${restaurant.name} home`}
+      onClick={(event) => {
+        if (pathname !== "/") return;
+
+        event.preventDefault();
+        const lenis = getLenisInstance();
+        if (lenis) {
+          lenis.scrollTo(0, { duration: 1.1 });
+        } else {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+        window.history.pushState(null, "", "/");
+      }}
     >
       <Image
         src={mediaPaths.logo}

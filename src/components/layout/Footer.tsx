@@ -21,7 +21,7 @@ export function Footer() {
 
             <div className="relative grid gap-10 text-white sm:grid-cols-2 lg:grid-cols-4 lg:gap-12">
               <div className="space-y-4">
-                <Logo inverted className="[&_img]:h-20 [&_img]:sm:h-24 [&_img]:lg:h-28" />
+                <Logo inverted className="[&_img]:h-28 [&_img]:sm:h-32 [&_img]:lg:h-36" />
                 <p className="max-w-xs font-body text-sm leading-relaxed text-white/75">
                   {restaurant.description}
                 </p>
