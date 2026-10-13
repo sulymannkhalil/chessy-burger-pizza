@@ -16,7 +16,7 @@ export const restaurant = {
 } as const;
 
 export const contact: ContactInfo = {
-  addressLines: ["Cheesy Pizza & Burger", "Fattuwala Sharqpur Road, Kot Mehmood, Sheikhupura, 39350, Pakistan"],
+  addressLines: ["Cheesy Pizza & Burger", "Fattuwala, Sharqpur Road, 39350, Pakistan"],
   phoneDisplay: "0324 5940858",
   phoneHref: "tel:+923245940858",
   whatsappHref: "https://wa.me/923245940858",
