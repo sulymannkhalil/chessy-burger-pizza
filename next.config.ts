@@ -5,6 +5,11 @@ const nextConfig: NextConfig = {
   experimental: {
     agentFeedback: true,
   },
+  // Serve public/ images as-is so replaced/cropped files show up immediately.
+  images: {
+    unoptimized: true,
+    minimumCacheTTL: 0,
+  },
   cacheComponents: true,
   partialPrefetching: true,
   turbopack: {

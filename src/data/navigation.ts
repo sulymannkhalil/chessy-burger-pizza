@@ -2,7 +2,7 @@ import type { NavItem } from "@/types";
 
 export const mainNav: NavItem[] = [
   { label: "Home", href: "/" },
-  { label: "Popular items", href: "/#popular" },
+  { label: "Popular Items", href: "/#popular" },
   { label: "About", href: "/#about" },
   { label: "Gallery", href: "/#gallery" },
   { label: "Reviews", href: "/#reviews" },

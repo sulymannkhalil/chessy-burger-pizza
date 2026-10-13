@@ -22,7 +22,13 @@ export function PopularItems() {
         <div className="grid grid-cols-1 items-stretch gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
           {popularItems.map((item, index) => (
             <Reveal key={item.id} delay={index * 0.06} className="flex h-full">
-              <FoodCard item={item} forceIcon={false} className="w-full" />
+              <FoodCard
+                item={item}
+                forceIcon={false}
+                disableHover
+                aspectRatio="4/3"
+                className="w-full"
+              />
             </Reveal>
           ))}
         </div>
