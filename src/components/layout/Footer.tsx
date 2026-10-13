@@ -103,9 +103,20 @@ export function Footer() {
         </Reveal>
       </Container>
 
-      <div className="border-t border-white/10">
-        <Container className="flex flex-col gap-1 py-5 font-body text-xs text-white/55 sm:flex-row sm:items-center sm:justify-between">
+      <div className="bg-brand-primary">
+        <Container className="flex flex-col gap-2 py-2.5 font-body text-xs font-semibold text-brand-dark sm:flex-row sm:items-center sm:justify-between sm:text-sm">
           <p>© 2026 {restaurant.name}. All rights reserved.</p>
+          <p>
+            Powered by{" "}
+            <a
+              href="https://goodtogo.pro/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline underline-offset-2 hover:no-underline"
+            >
+              Goodtogo.pro
+            </a>
+          </p>
         </Container>
       </div>
     </footer>
