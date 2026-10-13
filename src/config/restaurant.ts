@@ -16,7 +16,7 @@ export const restaurant = {
 } as const;
 
 export const contact: ContactInfo = {
-  addressLines: ["Cheesy Pizza & Burger", "Sheikhupura, Pakistan"],
+  addressLines: ["Cheesy Pizza & Burger", "Fattuwala Sharqpur Road, Kot Mehmood, Sheikhupura, 39350, Pakistan"],
   phoneDisplay: "0324 5940858",
   phoneHref: "tel:+923245940858",
   whatsappHref: "https://wa.me/923245940858",
@@ -27,7 +27,7 @@ export const contact: ContactInfo = {
 };
 
 export const openingHours: OpeningHoursEntry[] = [
-  { days: "Everyday", hours: "11:00 AM – 11:30 PM" }
+  { days: "Everyday", hours: "11:00 AM – 12:30 AM" }
 ];
 
 /** Only include socials that have real URLs */

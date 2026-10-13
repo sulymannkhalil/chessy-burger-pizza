@@ -55,6 +55,6 @@ export const sampleReviews: ReviewPlaceholder[] = [
 ];
 
 export const sampleReviewsSummary = {
-  overallRating: "4.8",
+  overallRating: "4.5",
   reviewCount: String(sampleReviews.length),
 } as const;

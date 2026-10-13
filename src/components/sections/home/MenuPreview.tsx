@@ -1,10 +1,10 @@
-import Link from "next/link";
 import { sectionCopy } from "@/data/content";
 import {
   featuredDish,
   getMenuItemCategoryId,
   menuCategories,
 } from "@/data/menu";
+import { mediaPaths } from "@/data/media";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { FoodImagePlaceholder } from "@/components/ui/FoodImagePlaceholder";
@@ -28,25 +28,30 @@ export function MenuPreview() {
             </Reveal>
 
             <div className="mt-8 grid gap-3 sm:grid-cols-2">
-              {menuCategories.map((category, index) => (
-                <Reveal key={category.id} delay={index * 0.05}>
-                  <Link
-                    href={`/menu#${category.id}`}
-                    className="block rounded-2xl bg-white/80 px-4 py-4 ring-1 ring-brand-dark/8 transition duration-200 hover:-translate-y-0.5 hover:bg-brand-primary/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary"
-                  >
-                    <p className="font-display text-lg uppercase text-brand-dark">
-                      {category.name}
-                    </p>
-                    <p className="mt-1 font-body text-sm text-brand-dark/65">
-                      {category.description}
-                    </p>
-                  </Link>
-                </Reveal>
-              ))}
+              {menuCategories
+                .filter((category) => category.id !== "deals")
+                .map((category, index) => (
+                  <Reveal key={category.id} delay={index * 0.05}>
+                    <div className="rounded-2xl bg-white/80 px-4 py-4 ring-1 ring-brand-dark/8">
+                      <p className="font-display text-lg uppercase text-brand-dark">
+                        {category.name}
+                      </p>
+                      <p className="mt-1 font-body text-sm text-brand-dark/65">
+                        {category.description}
+                      </p>
+                    </div>
+                  </Reveal>
+                ))}
             </div>
 
             <Reveal delay={0.2}>
-              <Button href="/menu" size="lg" className="mt-8">
+              <Button
+                href={mediaPaths.menuPdf}
+                size="lg"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-8"
+              >
                 View Full Menu
               </Button>
             </Reveal>

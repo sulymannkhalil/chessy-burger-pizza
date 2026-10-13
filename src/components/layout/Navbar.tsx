@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { Menu } from "lucide-react";
+import { contact } from "@/config/restaurant";
 import { mainNav } from "@/data/navigation";
 import { cn } from "@/lib/cn";
 import { Button } from "@/components/ui/Button";
@@ -70,7 +71,7 @@ export function Navbar() {
       >
         <Container className="relative flex items-center justify-between gap-4 px-6 sm:px-8 lg:px-10">
           <div className="relative z-10 flex min-w-0 shrink-0 items-center">
-            <Logo className="origin-left scale-[1.55] [&_img]:h-14 [&_img]:sm:h-16 [&_img]:lg:h-15" />
+            <Logo className="origin-left scale-[1.95] [&_img]:h-14 [&_img]:sm:h-16 [&_img]:lg:h-15" />
           </div>
 
           <nav
@@ -89,8 +90,14 @@ export function Navbar() {
           </nav>
 
           <div className="relative z-10 flex shrink-0 items-center gap-3">
-            <Button href="/menu" size="sm" className="hidden sm:inline-flex">
-              Explore Menu
+            <Button
+              href={contact.whatsappHref}
+              size="sm"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden bg-[#25D366] text-white hover:bg-[#1ebe57] focus-visible:ring-[#25D366] sm:inline-flex"
+            >
+              WhatsApp
             </Button>
             <button
               type="button"

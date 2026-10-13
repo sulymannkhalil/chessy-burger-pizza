@@ -129,9 +129,7 @@ export function isNavItemActive(
   if (href === "/") {
     return (
       pathname === "/" &&
-      (activeSection === "hero" ||
-        activeSection === "popular" ||
-        activeSection === "menu-preview")
+      (activeSection === "hero" || activeSection === "menu-preview")
     );
   }
 

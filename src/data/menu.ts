@@ -36,7 +36,6 @@ export const menuCategories: MenuCategory[] = [
         "1 Zinger Burger, 1 Regular Fries, 1 N.R Bottle.",
         "Rs. 599",
         {
-          popular: true,
           image: {
             src: mediaPaths.gourmetBurgerBoard,
             alt: "Hot Deal combo",
@@ -56,7 +55,6 @@ export const menuCategories: MenuCategory[] = [
         "Best Deal",
         "1 Small Pizza, 1 Zinger Burger, 1 N.R Bottle.",
         "Rs. 999",
-        { popular: true },
       ),
       item(
         "deal-food-1",
@@ -125,6 +123,15 @@ export const menuCategories: MenuCategory[] = [
         "Food Blast 1",
         "3 Small Pizza, 1 Litre Cold Drink.",
         "Rs. 1,750",
+        {
+          popular: true,
+          image: {
+            src: mediaPaths.gallery[0],
+            alt: "Food Blast 1 pizza deal",
+            label: "ATTACH THE IMAGE",
+            aspectRatio: "1/1",
+          },
+        },
       ),
       item(
         "deal-food-blast-2",
@@ -151,15 +158,7 @@ export const menuCategories: MenuCategory[] = [
     name: "Burgers",
     description: "Crispy, cheesy, and stacked for big bites.",
     items: [
-      item("burger-zinger", "Zinger Burger", "Crispy zinger fillet burger.", "Rs. 390", {
-        popular: true,
-        image: {
-          src: mediaPaths.gourmetBurgerBoard,
-          alt: "Zinger Burger",
-          label: "ATTACH THE IMAGE",
-          aspectRatio: "1/1",
-        },
-      }),
+      item("burger-zinger", "Zinger Burger", "Crispy zinger fillet burger.", "Rs. 390"),
       item("burger-tower", "Tower Burger", "Tall stacked tower burger.", "Rs. 699"),
       item("burger-mighty", "Mighty Burger", "Mighty-sized loaded burger.", "Rs. 700"),
       item("burger-patty", "Patty Burger", "Classic patty burger.", "Rs. 299"),
@@ -174,7 +173,7 @@ export const menuCategories: MenuCategory[] = [
           popular: true,
           featured: true,
           image: {
-            src: mediaPaths.sharingFeast,
+            src: mediaPaths.gallery[4],
             alt: "Cheesy Special Burger",
             label: "ATTACH THE IMAGE",
             aspectRatio: "1/1",
@@ -188,7 +187,6 @@ export const menuCategories: MenuCategory[] = [
         "Doner Burger",
         "Doner-style burger special.",
         "Rs. 499",
-        { popular: true },
       ),
     ],
   },
@@ -221,22 +219,21 @@ export const menuCategories: MenuCategory[] = [
     description: "Crispy fries, loaded and ready to share.",
     items: [
       item("fries-garlic-reg", "Garlic Fries Regular", "Regular garlic fries.", "Rs. 300"),
-      item("fries-large", "Large Fries", "Large portion of fries.", "Rs. 400"),
+      item("fries-large", "Large Fries", "Large portion of fries.", "Rs. 400", {
+        popular: true,
+        image: {
+          src: mediaPaths.gallery[8],
+          alt: "Large Fries",
+          label: "ATTACH THE IMAGE",
+          aspectRatio: "1/1",
+        },
+      }),
       item("fries-family", "Family Fries", "Family-size fries.", "Rs. 500"),
       item(
         "fries-pizza-large",
         "Pizza Fries Large",
         "Large pizza-style fries.",
         "Rs. 800",
-        {
-          popular: true,
-          image: {
-            src: mediaPaths.cheesyFries,
-            alt: "Pizza Fries Large",
-            label: "ATTACH THE IMAGE",
-            aspectRatio: "1/1",
-          },
-        },
       ),
       item("fries-loaded-large", "Loaded Fries Large", "Large loaded fries.", "Rs. 650"),
       item(
@@ -268,15 +265,7 @@ export const menuCategories: MenuCategory[] = [
     name: "Snacks",
     description: "Wings, nuggets, and crispy bites.",
     items: [
-      item("snack-hot-wings", "Hot Wings 10Pc", "10 pieces hot wings.", "Rs. 720", {
-        popular: true,
-        image: {
-          src: mediaPaths.friedChicken,
-          alt: "Hot Wings",
-          label: "ATTACH THE IMAGE",
-          aspectRatio: "1/1",
-        },
-      }),
+      item("snack-hot-wings", "Hot Wings 10Pc", "10 pieces hot wings.", "Rs. 720"),
       item("snack-nuggets", "Nuggets 10Pc", "10 pieces chicken nuggets.", "Rs. 600"),
       item("snack-bbq-wings", "B.B.Q Wings 10Pc", "10 pieces BBQ wings.", "Rs. 720"),
     ],
@@ -351,10 +340,18 @@ export const menuCategories: MenuCategory[] = [
   },
 ];
 
-export const popularItems: MenuItem[] = menuCategories
-  .flatMap((category) => category.items)
-  .filter((menuItem) => menuItem.popular)
-  .slice(0, 6);
+const POPULAR_ITEM_ORDER = [
+  "burger-cheesy-special",
+  "deal-food-blast-1",
+  "fries-large",
+] as const;
+
+export const popularItems: MenuItem[] = POPULAR_ITEM_ORDER.map(
+  (id) =>
+    menuCategories
+      .flatMap((category) => category.items)
+      .find((menuItem) => menuItem.id === id)!,
+);
 
 export const featuredDish: MenuItem =
   menuCategories

@@ -10,6 +10,8 @@ type FoodCardProps = {
   categoryId?: string;
   className?: string;
   compact?: boolean;
+  /** When false, show the item image if available (popular / featured). */
+  forceIcon?: boolean;
 };
 
 export function FoodCard({
@@ -17,6 +19,7 @@ export function FoodCard({
   categoryId,
   className,
   compact = false,
+  forceIcon = true,
 }: FoodCardProps) {
   const resolvedCategoryId = categoryId ?? getMenuItemCategoryId(item.id);
 
@@ -34,19 +37,24 @@ export function FoodCard({
         alt={item.image?.alt ?? item.name}
         aspectRatio="16/9"
         rounded="none"
-        forceIcon
-        className={cn("w-full", compact ? "min-h-[7rem]" : "min-h-[8rem]")}
+        forceIcon={forceIcon}
+        className="w-full shrink-0"
       />
-      <div className={cn("flex flex-1 flex-col gap-2 p-4", !compact && "sm:p-5")}>
+      <div
+        className={cn(
+          "flex min-h-[7.5rem] flex-1 flex-col gap-2 p-4 sm:min-h-[8.5rem]",
+          !compact && "sm:p-5",
+        )}
+      >
         <div className="flex items-start justify-between gap-3">
-          <h3 className="font-display text-xl uppercase leading-tight text-brand-dark sm:text-2xl">
+          <h3 className="line-clamp-2 font-display text-xl uppercase leading-tight text-brand-dark sm:text-2xl">
             {item.name}
           </h3>
           <p className="shrink-0 font-body text-sm font-bold text-brand-secondary sm:text-base">
             {item.price}
           </p>
         </div>
-        <p className="font-body text-sm leading-relaxed text-brand-dark/70">
+        <p className="line-clamp-2 font-body text-sm leading-relaxed text-brand-dark/70">
           {item.description}
         </p>
       </div>

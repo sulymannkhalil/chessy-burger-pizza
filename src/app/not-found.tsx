@@ -8,13 +8,10 @@ export default function NotFound() {
         Page not found
       </h1>
       <p className="max-w-md font-body text-brand-dark/70">
-        That route doesn&apos;t exist. Head home or open the full menu.
+        That route doesn&apos;t exist. Head back home to keep browsing Chessy.
       </p>
       <div className="flex flex-wrap justify-center gap-3">
         <Button href="/">Back Home</Button>
-        <Button href="/menu" variant="outline">
-          View Menu
-        </Button>
       </div>
     </div>
   );

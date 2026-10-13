@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { X } from "lucide-react";
+import { contact } from "@/config/restaurant";
 import { mainNav } from "@/data/navigation";
 import { cn } from "@/lib/cn";
 import { Button } from "@/components/ui/Button";
@@ -96,8 +97,15 @@ export function MobileNavigation({ open, onClose }: MobileNavigationProps) {
         </nav>
 
         <div className="pt-8">
-          <Button href="/menu" size="lg" className="w-full" onClick={onClose}>
-            Explore Menu
+          <Button
+            href={contact.whatsappHref}
+            size="lg"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full bg-[#25D366] text-white hover:bg-[#1ebe57] focus-visible:ring-[#25D366]"
+            onClick={onClose}
+          >
+            WhatsApp
           </Button>
         </div>
       </div>

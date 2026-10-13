@@ -6,9 +6,9 @@ export const heroContent = {
 
   supporting:
     "A fast-food destination with confident flavor, generous plates, and a modern neighborhood energy.",
-  exploreCta: "Explore Menu",
+  exploreCta: "WhatsApp",
   visitCta: "Visit Us",
-  supportingInfo: "Open Everyday · 11:00 AM – 11:30 PM · Sheikhupura, Pakistan",
+  supportingInfo: "Open Everyday · 11:00 AM – 12:30 AM · Sheikhupura, Pakistan",
   backgroundImage: {
     src: mediaPaths.heroBackground,
     alt: "Chessy Pizza and Burger hero",
@@ -34,8 +34,8 @@ export const aboutContent = {
     },
   ],
   media: {
-    src: mediaPaths.crownPizza,
-    alt: "Signature ring pizza fresh from the kitchen",
+    src: mediaPaths.aboutImage,
+    alt: "Chessy Pizza and Burger food",
     label: "ATTACH THE IMAGE – ABOUT RESTAURANT",
     aspectRatio: "3/4",
   } satisfies MediaAsset,

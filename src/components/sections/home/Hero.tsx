@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { contact } from "@/config/restaurant";
 import { heroContent } from "@/data/content";
 import { mediaPaths } from "@/data/media";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
@@ -122,7 +123,13 @@ export function Hero() {
             data-hero-item
             className="mt-6 flex w-full flex-wrap items-center justify-center gap-3 sm:mt-8 [&_a]:min-h-12 [&_a]:px-7 [&_a]:text-base sm:[&_a]:min-h-0 sm:[&_a]:px-6 sm:[&_a]:text-lg"
           >
-            <Button href="/menu" size="lg">
+            <Button
+              href={contact.whatsappHref}
+              size="lg"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-[#25D366] text-white hover:bg-[#1ebe57] focus-visible:ring-[#25D366]"
+            >
               {heroContent.exploreCta}
             </Button>
             <Button
