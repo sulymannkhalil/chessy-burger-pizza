@@ -31,7 +31,6 @@ export const mediaPaths = {
     "/images/media%20(11).jpg",
     "/images/media%20(12).jpg",
     "/images/media%20(13).jpg",
-    "/images/media%20(14).jpg",
     "/images/media%20(15).jpg",
   ],
 } as const;

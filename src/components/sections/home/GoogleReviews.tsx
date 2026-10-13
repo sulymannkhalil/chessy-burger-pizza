@@ -60,7 +60,7 @@ export async function GoogleReviews() {
                 {googleReviews.overallRating}
               </p>
               <p className="mt-1 font-body text-sm text-brand-dark/70">
-                {googleReviews.reviewCount} Google reviews
+                59 Google reviews
               </p>
             </div>
           </Reveal>
