@@ -8,7 +8,7 @@ export const heroContent = {
     "A fast-food destination with confident flavor, generous plates, and a modern neighborhood energy.",
   exploreCta: "WhatsApp",
   visitCta: "Visit Us",
-  supportingInfo: "Open Everyday · 11:00 AM – 12:30 AM · Sheikhupura, Pakistan",
+  supportingInfo: "Fattuwala Sharqpur Road, Kot Mehmood, Sheikhupura, 39350, Pakistan",
   backgroundImage: {
     src: mediaPaths.heroBackground,
     alt: "Chessy Pizza and Burger hero",

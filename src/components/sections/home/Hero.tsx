@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { MapPin } from "lucide-react";
 import { contact } from "@/config/restaurant";
 import { heroContent } from "@/data/content";
 import { mediaPaths } from "@/data/media";
@@ -133,9 +134,11 @@ export function Hero() {
               {heroContent.exploreCta}
             </Button>
             <Button
-              href="/#contact"
+              href={contact.mapsDirectionsUrl}
               variant="outline"
               size="lg"
+              target="_blank"
+              rel="noopener noreferrer"
               className="border-white text-white hover:bg-white hover:text-brand-dark"
             >
               {heroContent.visitCta}
@@ -143,9 +146,13 @@ export function Hero() {
           </div>
           <p
             data-hero-item
-            className="mx-auto mt-5 max-w-md font-body text-base font-semibold uppercase tracking-[0.14em] text-brand-primary sm:mt-6 sm:max-w-none sm:text-sm"
+            className="mx-auto mt-5 flex max-w-md items-start justify-center gap-2 font-body text-base font-semibold uppercase tracking-[0.14em] text-brand-primary sm:mt-6 sm:max-w-xl sm:text-sm"
           >
-            {heroContent.supportingInfo}
+            <MapPin
+              className="mt-0.5 h-4 w-4 shrink-0 sm:h-3.5 sm:w-3.5"
+              aria-hidden
+            />
+            <span>{heroContent.supportingInfo}</span>
           </p>
         </div>
       </Container>

@@ -82,7 +82,12 @@ export function LocationContact() {
 
               <div className="flex flex-wrap gap-3 pt-2">
                 {contact.mapsDirectionsUrl ? (
-                  <Button href={contact.mapsDirectionsUrl} size="sm">
+                  <Button
+                    href={contact.mapsDirectionsUrl}
+                    size="sm"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     Get Directions
                   </Button>
                 ) : null}
